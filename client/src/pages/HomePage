@@ -1,0 +1,64 @@
+import React, { useState, useEffect, useLayoutEffect } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { retrieveUsers } from "../api/userAPI";
+import type { UserData } from "../interfaces/UserData";
+import ErrorPage from "./ErrorPage";
+import UserList from '../components/Users';
+import auth from '../utils/auth';
+
+const properties = [
+  {
+    id: 1,
+    title: "Cozy 2-Bedroom Apartment",
+    location: "Downtown, New York",
+    price: "$2,500/month",
+    description: "A beautiful apartment located in the heart of downtown. Close to all amenities.",
+    category: "Rent"
+  },
+  {
+    id: 2,
+    title: "Luxury Villa",
+    location: "Malibu, California",
+    price: "$10,000/month",
+    description: "A stunning villa with ocean views and a private pool.",
+    category: "Rent"
+  },
+  {
+    id: 3,
+    title: "Modern Studio",
+    location: "Austin, Texas",
+    price: "$1,800/month",
+    description: "A sleek studio apartment perfect for young professionals.",
+    category: "Rent"
+  },
+  {
+    id: 4,
+    title: "Charming Cottage",
+    location: "Savannah, Georgia",
+    price: "$350,000",
+    description: "A quaint cottage with a beautiful garden and a cozy fireplace.",
+    category: "Buy"
+  },
+  {
+    id: 5,
+    title: "Spacious Family Home",
+    location: "Orlando, Florida",
+    price: "$500,000",
+    description: "A large home perfect for families, featuring a pool and a big backyard.",
+    category: "Buy"
+  },
+  {
+    id: 6,
+    title: "Urban Loft",
+    location: "Chicago, Illinois",
+    price: "$750,000",
+    description: "A modern loft in the city center with amazing skyline views.",
+    category: "Buy"
+  }
+];
+
+const HomePage = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("Buy");
+  const [filteredProperties, setFilteredProperties] = useState(properties);
