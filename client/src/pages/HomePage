@@ -34,26 +34,26 @@ const properties = [
   },
   {
     id: 4,
-    title: "Charming Cottage",
-    location: "Savannah, Georgia",
-    price: "$350,000",
-    description: "A quaint cottage with a beautiful garden and a cozy fireplace.",
+    title: "816 E Orange Street",
+    location: "Fayetteville, NC 28301",
+    price: "$30,000",
+    description: "Residential property located in a peaceful neighborhood. MLS# 10084390.",
     category: "Buy"
   },
   {
     id: 5,
-    title: "Spacious Family Home",
-    location: "Orlando, Florida",
-    price: "$500,000",
-    description: "A large home perfect for families, featuring a pool and a big backyard.",
+    title: "907 Field Ivy Drive",
+    location: "Fuquay Varina, NC 27526",
+    price: "$329,900",
+    description: "Spacious residential home with modern amenities. MLS# 10075556.",
     category: "Buy"
   },
   {
     id: 6,
-    title: "Urban Loft",
-    location: "Chicago, Illinois",
-    price: "$750,000",
-    description: "A modern loft in the city center with amazing skyline views.",
+    title: "930 Old Halifax Road",
+    location: "Louisburg, NC 27549",
+    price: "$300,000",
+    description: "Charming residential property in a serene location. MLS# 10076094.",
     category: "Buy"
   }
 ];
@@ -62,3 +62,53 @@ const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Buy");
   const [filteredProperties, setFilteredProperties] = useState(properties);
+
+  useEffect(() => {
+    // Perform filtering whenever searchQuery or selectedCategory changes
+    const filtered = properties.filter(property =>
+      (property.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+       property.location.toLowerCase().includes(searchQuery.toLowerCase())) &&
+      property.category === selectedCategory
+    );
+    setFilteredProperties(filtered);
+  }, [searchQuery, selectedCategory]); // Runs whenever searchQuery or selectedCategory changes
+
+  return (
+    <div className="container mx-auto p-4">
+      <nav className="flex justify-center mb-6 space-x-6">
+        <a href="/buy" className="text-blue-500 hover:underline" onClick={() => setSelectedCategory("Buy")}>Buy</a>
+        <a href="/rent" className="text-blue-500 hover:underline" onClick={() => setSelectedCategory("Rent")}>Rent</a>
+        <a href="/sell" className="text-blue-500 hover:underline" onClick={() => setSelectedCategory("Sell")}>Sell</a>
+        <a href="/" className="text-blue-500 hover:underline" onClick={() => setSelectedCategory("Buy")}>Home</a>
+      </nav>
+
+      <h1 className="text-3xl font-bold text-center mb-6">Property Listings</h1>
+
+      <div className="mb-6">
+        <input
+          type="text"
+          placeholder="Search properties..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredProperties.map((property) => (
+          <Card key={property.id} className="shadow-lg rounded-2xl">
+            <CardContent>
+              <h2 className="text-xl font-semibold">{property.title}</h2>
+              <p className="text-gray-600">{property.location}</p>
+              <p className="text-green-600 font-bold">{property.price}</p>
+              <p className="text-gray-700 mt-2">{property.description}</p>
+              <Button className="mt-4 w-full">View Details</Button>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default HomePage;
