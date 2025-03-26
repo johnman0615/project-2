@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import  { useState, useEffect, useLayoutEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { retrieveUsers } from "../api/userAPI";
@@ -6,6 +6,7 @@ import type { UserData } from "../interfaces/UserData";
 import ErrorPage from "./ErrorPage";
 import UserList from '../components/Users';
 import auth from '../utils/auth';
+import Navbar from "../components/Navbar";
 
 const properties = [
   {
@@ -73,14 +74,13 @@ const HomePage = () => {
     setFilteredProperties(filtered);
   }, [searchQuery, selectedCategory]); // Runs whenever searchQuery or selectedCategory changes
 
+  useLayoutEffect(() => {
+    console.log("The layout effect has run.");
+  }, []); // Runs once after the DOM has been updated
+
   return (
     <div className="container mx-auto p-4">
-      <nav className="flex justify-center mb-6 space-x-6">
-        <a href="/buy" className="text-blue-500 hover:underline" onClick={() => setSelectedCategory("Buy")}>Buy</a>
-        <a href="/rent" className="text-blue-500 hover:underline" onClick={() => setSelectedCategory("Rent")}>Rent</a>
-        <a href="/sell" className="text-blue-500 hover:underline" onClick={() => setSelectedCategory("Sell")}>Sell</a>
-        <a href="/" className="text-blue-500 hover:underline" onClick={() => setSelectedCategory("Buy")}>Home</a>
-      </nav>
+      <Navbar setSelectedCategory={setSelectedCategory} />
 
       <h1 className="text-3xl font-bold text-center mb-6">Property Listings</h1>
 
