@@ -1,1 +1,14 @@
-DS.store
+# Node.js dependencies
+node_modules/
+# Logs
+logs/
+*.log
+# Environment variables
+.env
+# Build files
+dist/
+build/
+# OS-specific files
+.DS_Store
+ DS.store
+Thumbs.db

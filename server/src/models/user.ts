@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../config/connection";
+import sequelize from "../config/connection.ts";
 
 class User extends Model {
   public id!: number;
