@@ -21,7 +21,7 @@ const MapView: React.FC<MapViewProps> = ({
     googleMapsApiKey: (import.meta as any).env.VITE_GOOGLE_MAPS_API_KEY || ''  });
 
   const center = useMemo(() => 
-    propCenter || { lat: 40.7128, lng: -74.0060 }, // Default to New York City
+    propCenter || { lat: 40.7128, lng: -74.0060 }, // Default to New York City but can be changed
     [propCenter]
   );
 
