@@ -7,6 +7,9 @@ import App from './App.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import Home from './pages/Home.tsx';
 import Login from './pages/Login.tsx';
+import RentPage from './pages/RentPage.tsx';
+import BuyPage from './pages/BuyPage.tsx';
+import SellPage from './pages/SellPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +25,18 @@ const router = createBrowserRouter([
         path: '/login',
         element: <Login />
       }, 
+      {
+        path: '/rent',
+        element: <RentPage />
+      },
+      {
+        path: '/buy',
+        element: <BuyPage />
+      },
+      {
+        path: '/sell',
+        element: <SellPage />
+      },
     ]
   }
 ])
