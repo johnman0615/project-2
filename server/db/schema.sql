@@ -1,10 +1,19 @@
+-- Delete database if exists
+DROP DATABASE IF EXISTS properties_db;
+
+-- Create database 
+CREATE DATABASE properties_db;
+
+-- Connect to the database
+\connect properties_db;
+
 -- Create Users Table
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     phone VARCHAR(20),
-    user_type VARCHAR(20) CHECK (user_type IN ('buyer', 'seller', 'agent')),
+    user_type VARCHAR(20) CHECK (user_type IN ('buyer', 'seller', 'agent'))
 );
 
 -- Create Agents Table
@@ -30,5 +39,5 @@ CREATE TABLE properties (
     square_feet INT,
     agent_id INT REFERENCES agents(agent_id) ON DELETE SET NULL,
     seller_id INT REFERENCES users(user_id) ON DELETE SET NULL,
-    status VARCHAR(20) CHECK (status IN ('available', 'sold', 'pending')) DEFAULT 'available',
+    status VARCHAR(20) CHECK (status IN ('available', 'sold', 'pending')) DEFAULT 'available'
 );
